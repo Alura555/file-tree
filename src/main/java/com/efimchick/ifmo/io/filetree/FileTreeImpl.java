@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class FileTreeImpl implements FileTree {
     private static final Comparator<File> fileComparator = (o1, o2) -> {
         if (o1.isFile() && o2.isFile() || o1.isDirectory() && o2.isDirectory()) {
-            return o1.compareTo(o2);
+            return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
         } else {
             return o1.isDirectory()
                     ? -1
@@ -19,8 +19,8 @@ public class FileTreeImpl implements FileTree {
 
     private final Function<Path, String> getPathInfo = path1 ->
             path1.getFileName() + " " + sizeOfFile(path1) + " bytes\n";
-    private final Function<Boolean, String> addItemCharacter = hasNext1 -> hasNext1 ? "├─ " : "└─ ";
-    private final Function<Boolean, String> addSeparateCharacter = hasNext1 -> hasNext1 ? "│  " : "   ";
+    private static final Function<Boolean, String> addItemCharacter = hasNext1 -> hasNext1 ? "├─ " : "└─ ";
+    private static final Function<Boolean, String> addSeparateCharacter = hasNext1 -> hasNext1 ? "│  " : "   ";
 
 
     @Override
