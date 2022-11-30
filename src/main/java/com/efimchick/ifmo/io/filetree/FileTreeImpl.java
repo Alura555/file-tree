@@ -19,8 +19,8 @@ public class FileTreeImpl implements FileTree {
 
     private final Function<Path, String> getPathInfo = path1 ->
             path1.getFileName() + " " + sizeOfFile(path1) + " bytes\n";
-    private static final Function<Boolean, String> addItemCharacter = hasNext1 -> hasNext1 ? "├─ " : "└─ ";
-    private static final Function<Boolean, String> addSeparateCharacter = hasNext1 -> hasNext1 ? "│  " : "   ";
+    private static final Function<Boolean, String> addItemCharacter = hasNext1 -> Boolean.TRUE.equals(hasNext1) ? "├─ " : "└─ ";
+    private static final Function<Boolean, String> addSeparateCharacter = hasNext1 -> Boolean.TRUE.equals(hasNext1) ? "│  " : "   ";
 
 
     @Override
